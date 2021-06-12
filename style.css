@@ -1,0 +1,142 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+*:focus{
+    outline: none;
+}
+button:active{
+    box-shadow: 0 0 5px 2px rgb(53, 16, 12);
+}
+body{
+    background-color: darkorange;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.input, .btn{
+    padding: 6px;
+    margin: 4px;
+    border: rgba(255, 170, 12, 0.5) 1px solid;
+    border-radius: 5px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+    background-color:rgb(255, 252, 75);
+    color: darkorange;
+}
+.btn_delete{
+    background-color: tomato;
+    color: black;
+}
+.btn_check{
+    background-color:#32cd32;
+    color: black;
+}
+::placeholder{
+    color: darkorange;
+}
+.input__text{
+    width: 300px;
+}
+.addToDoDiv{
+    padding-top: 10px;
+}
+#dateOfEndToDo, #noDateOfEndToDo, #descOfToDo{
+    display: block;
+    padding: 4px;
+    margin: 2px;
+}
+#dateInfoDiv{
+    text-align: center;
+    color: red;
+    padding-top: 10px;
+}
+label{
+    padding: 4px;
+    margin: 2px;
+    display: inline-block;
+    color: rgb(2, 4, 34);
+}
+#noDateOfEndToDo{
+    display: inline-block;
+}
+
+.addToDoDiv__attributes{
+    margin-left: 3rem;
+    padding-top: 5px;
+}
+
+ul{
+    list-style-type: none;
+    margin-top: 25px;
+}
+.toDoListDiv{
+    margin-top: 5px;
+}
+.toDoList__li{
+    width: 320px;
+    border: rgba(255, 170, 12, 0.5) 1px solid;
+    padding: 5px;
+    margin: 2px 2px 0 2px;
+    background-color:rgb(255, 252, 75);
+    color: darkorange;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.toDoList__li:hover{
+    background-color:rgba(255, 252, 75, 0.637);
+}
+.toDoList__liTextDiv{
+    padding-top: 7px;
+    /* margin-right: auto; */
+}
+.toDoList__liBtnsDiv{
+    display: flex;
+    justify-content: flex-end;
+    justify-self: flex-end; 
+}
+.btn_delete:hover{
+    background-color: rgba(255, 99, 71, 0.603);
+    box-shadow: none;
+}
+.btn_check:hover{
+    background-color: rgba(50, 205, 50, 0.603);
+    box-shadow: none;
+}
+.toDoList__li__details{
+    width: 320px;
+    border: rgba(255, 170, 12, 0.5) 1px solid;
+    padding: 5px;
+    margin: 0 2px;
+    background-color:rgb(255, 252, 75);
+    color: darkorange;
+    /* transition: all 2s linear;
+    animation: animateDetails 2s linear 0s; */
+    /* display: none; */
+}
+.toDoList__li__details--none{
+    display: none;
+}
+.hide{
+    display: none;
+}
+.show{
+    display: block;
+}
+.checkedToDo{
+    background-color: limegreen;
+}
+
+/* @keyframes animateDetails{
+    0%{
+        display: none;
+    }
+    100%{
+        display: block;
+    }
+} */

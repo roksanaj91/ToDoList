@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="fontawesome-free-5.15.2-web/css/all.css">
+</head>
+<body>
+    <div class="container">
+        <div class="addToDoDiv">
+            <div class="addToDoDiv__noAttributes">
+                <input class="input input__text" type="text" placeholder="Wpisz zadanie do zrobienia" id="nameOfToDo">
+                <button class="btn btn_add">Dodaj</button>
+            </div>
+            <div class="addToDoDiv__attributes">
+               <label for="dateOfEndToDo"> Data zakończenia:</label>
+               <input class="input" type="date" name="dateOfEndToDo" id="dateOfEndToDo">
+               <label for="timeOfEndToDo"> Czas zakończenia:</label><br>
+               <input class="input" type="time" name="timeOfEndToDo" id="timeOfEndToDo"><br>
+               <div id="dateInfoDiv">Wprowadź prawidłową datę i/lub godzinę!</div>
+               <label for="noDateOfEndToDo"> Bezterminowo:</label>
+               <input class="input" type="checkbox" name="noDateOfEndToDo" id="noDateOfEndToDo"><br>
+               <label for="descOfToDo"> Opis:</label>
+               <textarea class="input" name="descOfToDo" id="descOfToDo" cols="30" rows="10"></textarea>
+            </div>
+        </div>
+        <div class="toDoListDiv">
+            <!-- <div class="toDoList">
+                <div class="toDoList__li"> 
+                    <div class="toDoList__liTextDiv">zrobić coś</div> 
+                    <div class="toDoList__liBtnsDiv">
+                        <button class="btn btn_delete fas fa-trash"></button>
+                        <button class="btn btn_edit fas fa-edit"></button>
+                    </div>
+                </div>
+                <div class="toDoList__li__details">
+                    <p class="details__startDate">Start: data</p>
+                    <p class="details__endDate">Koniec: data</p>
+                    <p class="details__description">Opis: isdobfifdsbuidsbvusdbausdbasdobsduobvuds bousbdosdbuibdsusdb</p>
+                </div>
+            </div> -->
+        </div>
+    </div>  
+    <script src="main.js"></script>  
+</body>
+</html>
