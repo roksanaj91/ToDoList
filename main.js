@@ -12,6 +12,7 @@ let today = new Date();
 dateInfoDiv.classList.add('hide');
 
 addToDoBtn.addEventListener('click', function () {
+    // console.log(dateOfEndToDo.value + ' ' + timeOfEndToDo.value);
     if(endDateValidate(dateOfEndToDo.value + ' ' + timeOfEndToDo.value) || noDateOfEndToDo.checked){    
     addToDo(nameOfToDo, 
         dateOfEndToDo, 
@@ -21,13 +22,13 @@ addToDoBtn.addEventListener('click', function () {
     }
     else{
         dateInfoDiv.classList.remove('hide');
-        console.log(getDateAndTime());
+        // console.log(getDateAndTime());
     }
 });
 
 function getDateAndTime() {
     // let date = today.getFullYear() + '-' + ('0' + today.getMonth() + 1).slice(-2) + '-' + today.getDate();
-    let time = today.getHours() + ":" + ('0' + (today.getMinutes()+1)).slice(-2);
+    let time = ('0' + today.getHours()).slice(-2) + ":" + ('0' + (today.getMinutes()+1)).slice(-2);
     todayDate = today.getFullYear() + '-' + ('0' + (today.getMonth()+1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
     let dateTime = todayDate + ' ' + time;
     return dateTime;
@@ -56,6 +57,8 @@ function clearInputs() {
 }
 function endDateValidate(dateAndTime){
     let validationDate = false;  
+    // console.log(dateAndTime)
+    // console.log(getDateAndTime())
     if(dateAndTime > getDateAndTime()){
         // console.log("zgadza się");
         validationDate = true;
@@ -156,8 +159,9 @@ function displayToDos(toDosArray) {
                 removeToDo(event.target.parentElement.parentElement.dataset.id);
             }
             if(event.target.classList.contains('btn_check')){
-                checkToDo(event.target.parentElement.dataset.id);
-                console.log(event.target.parentElement.dataset.id)
+                
+                console.log(event.target.parentElement.parentElement.dataset.id);
+                checkToDo(event.target.parentElement.parentElement.dataset.id);
             }
         });
     });
@@ -165,9 +169,10 @@ function displayToDos(toDosArray) {
     // let tempItem = cart.find(item => item.id === id);
 
 function removeToDo(id) {
-    // console.log(id);
+    console.log(id);
     // zwroc do cart all itemsy, które nie mają podanego w parametrze id
     newArray = toDosArray.filter(item => item.identificator != id);
+    // console.log(newArray)
     addToLocalStorage(newArray);
     displayToDos(getFromLocalStorage());
 }
@@ -175,21 +180,18 @@ function removeToDo(id) {
 document.addEventListener("DOMContentLoaded", () => {
     displayToDos(getFromLocalStorage());
 });
-function checkToDo(id){
-    // let tempItem = toDosArray.find(item => item.id === id);
-   
+
+function checkToDo(idofItem){
+    //  let tempItems = toDosArray.find(item => item.identificator == idofItem);
     toDosArray.forEach(item => {
-        if(item.id == id){
-            item.classList.add(checkedToDo);
+        if(item.identificator == idofItem){
+            console.log(item)
+            // item.classList.add('checkedToDo');
             item.isDone = true;
         }
     })
+    // console.log(tempItems)
+   console.log(toDosArray)
     addToLocalStorage(toDosArray);
     displayToDos(getFromLocalStorage());
 }
-
-
-//cassandra: allow filering ut its slow - dnt use
-//database administrator - role to select
-//Cedrick.lunven@datastax.com - koszulki xD
-//tokeny w js, zapisac csv
