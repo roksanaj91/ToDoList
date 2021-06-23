@@ -49,7 +49,7 @@ body{
     padding: 4px;
     margin: 2px;
 }
-#dateInfoDiv{
+#dateErrorDiv{
     text-align: center;
     color: red;
     padding-top: 10px;
@@ -129,9 +129,11 @@ ul{
     display: block;
 }
 .checkedToDo{
-    background-color: limegreen;
+    text-decoration: line-through;
 }
-
+.buttonNotActive{
+    background-color: darkgrey;
+}
 /* @keyframes animateDetails{
     0%{
         display: none;

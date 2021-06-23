@@ -5,11 +5,11 @@ const noDateOfEndToDo = document.querySelector('#noDateOfEndToDo');
 const descOfToDo = document.querySelector('#descOfToDo');
 const addToDoBtn = document.querySelector('.btn, .btn_add');
 const toDoListDiv = document.querySelector('.toDoListDiv');
-const dateInfoDiv = document.querySelector('#dateInfoDiv');
+const dateErrorDiv = document.querySelector('#dateErrorDiv');
 
 let toDosArray = [];
 let today = new Date();
-dateInfoDiv.classList.add('hide');
+dateErrorDiv.classList.add('hide');
 
 addToDoBtn.addEventListener('click', function () {
     // console.log(dateOfEndToDo.value + ' ' + timeOfEndToDo.value);
@@ -21,7 +21,7 @@ addToDoBtn.addEventListener('click', function () {
         descOfToDo);
     }
     else{
-        dateInfoDiv.classList.remove('hide');
+        dateErrorDiv.classList.remove('hide');
         // console.log(getDateAndTime());
     }
 });
@@ -89,7 +89,7 @@ function addToDo(nameOfToDo,
     timeOfEndToDo, 
     noDateOfEndToDo, 
     descOfToDo){
-        dateInfoDiv.classList.add('hide');
+        dateErrorDiv.classList.add('hide');
 // console.log(dateOfEndToDo.value + "sss")
     let toDoObj = {
         name: nameOfToDo.value,
@@ -133,6 +133,11 @@ function displayToDos(toDosArray) {
             <p class="details__endDate">Koniec: ${toDo.endDate} ${toDo.endTime}</p>
             <p class="details__description">Opis: ${toDo.description}</p>
         </div>`;
+        if(toDo.isDone == true){
+             div.firstElementChild.firstElementChild.classList.add('checkedToDo');
+            //  console.log(div.firstElementChild.firstElementChild)
+            // div.nextSibling.lastChild.classList.add('buttonNotActive');
+        }
         // console.log(toDo.endDate + " end");
         toDoListDiv.appendChild(div);
     });
@@ -159,9 +164,10 @@ function displayToDos(toDosArray) {
                 removeToDo(event.target.parentElement.parentElement.dataset.id);
             }
             if(event.target.classList.contains('btn_check')){
-                
-                console.log(event.target.parentElement.parentElement.dataset.id);
-                checkToDo(event.target.parentElement.parentElement.dataset.id);
+                // event.target.parentElement.parentElement.classList.add('checkedToDo');
+                // console.log(event.target.parentElement.parentElement)
+                // console.log(event.target.parentElement.parentElement.dataset.id);
+                checkToDo(event);
             }
         });
     });
@@ -181,17 +187,20 @@ document.addEventListener("DOMContentLoaded", () => {
     displayToDos(getFromLocalStorage());
 });
 
-function checkToDo(idofItem){
-    //  let tempItems = toDosArray.find(item => item.identificator == idofItem);
+function checkToDo(event){
+    let idOfItem = event.target.parentElement.parentElement.dataset.id;
+    //  let tempItems = toDosArray.find(item => item.identificator == idOfItem);
     toDosArray.forEach(item => {
-        if(item.identificator == idofItem){
-            console.log(item)
+        if(item.identificator == idOfItem && item.isDone == false){
+            // console.log(item)
             // item.classList.add('checkedToDo');
             item.isDone = true;
+            console.log(event.target)
+            // classList.add('buttonNotActive');
         }
     })
     // console.log(tempItems)
-   console.log(toDosArray)
+    // console.log(toDosArray)
     addToLocalStorage(toDosArray);
     displayToDos(getFromLocalStorage());
 }
