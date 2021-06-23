@@ -204,3 +204,6 @@ function checkToDo(event){
     addToLocalStorage(toDosArray);
     displayToDos(getFromLocalStorage());
 }
+
+
+//TODO: zmiana animacji - usuwanie, zaznaczenie jako zrobione? dodanie? rozwijanie to do, zmiana kolorystki, autoprzewinięcie ekranu na rozwinięcie to do, 
