@@ -148,12 +148,13 @@ function displayToDos(toDosArray) {
             if(event.target.classList.contains('toDoList__li')){
                     //po kliknięciu nadaj klasę show dla elementu brat
                     if (div.nextElementSibling.classList.contains('hide')) {
-                        div.nextElementSibling.classList.add('show');
+                        div.nextElementSibling.classList.add('expand');
                         div.nextElementSibling.classList.remove('hide');
                     }
                     else {
-                        div.nextElementSibling.classList.add('hide');
-                        div.nextElementSibling.classList.remove('show');
+                        div.nextElementSibling.classList.remove('expand');
+                        div.nextElementSibling.classList.add('hide');                   
+
                     }
                 }
             });
