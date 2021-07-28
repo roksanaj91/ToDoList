@@ -6,14 +6,20 @@ const descOfToDo = document.querySelector('#descOfToDo');
 const addToDoBtn = document.querySelector('.btn, .btn_add');
 const toDoListDiv = document.querySelector('.toDoListDiv');
 const dateErrorDiv = document.querySelector('#dateErrorDiv');
+const nameErrorDiv = document.querySelector('#nameErrorDiv');
 
 let toDosArray = [];
 let today = new Date();
-dateErrorDiv.classList.add('hide');
 
 addToDoBtn.addEventListener('click', function () {
-    // console.log(dateOfEndToDo.value + ' ' + timeOfEndToDo.value);
-    if(endDateValidate(dateOfEndToDo.value + ' ' + timeOfEndToDo.value) || noDateOfEndToDo.checked){    
+    console.log(nameOfToDo.value.length)
+    if(nameOfToDo.value.length < 3) {
+        if(endDateValidate(dateOfEndToDo.value + ' ' + timeOfEndToDo.value) || noDateOfEndToDo.checked)  dateErrorDiv.classList.add('hide');
+        nameErrorDiv.classList.remove('hide');
+        return}
+    if(nameOfToDo.value.length >= 3) nameErrorDiv.classList.add('hide');
+    
+    if(endDateValidate(dateOfEndToDo.value + ' ' + timeOfEndToDo.value) || noDateOfEndToDo.checked){   
     addToDo(nameOfToDo, 
         dateOfEndToDo, 
         timeOfEndToDo, 
@@ -22,12 +28,10 @@ addToDoBtn.addEventListener('click', function () {
     }
     else{
         dateErrorDiv.classList.remove('hide');
-        // console.log(getDateAndTime());
     }
 });
 
 function getDateAndTime() {
-    // let date = today.getFullYear() + '-' + ('0' + today.getMonth() + 1).slice(-2) + '-' + today.getDate();
     let time = ('0' + today.getHours()).slice(-2) + ":" + ('0' + (today.getMinutes()+1)).slice(-2);
     todayDate = today.getFullYear() + '-' + ('0' + (today.getMonth()+1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
     let dateTime = todayDate + ' ' + time;
@@ -57,24 +61,15 @@ function clearInputs() {
 }
 function endDateValidate(dateAndTime){
     let validationDate = false;  
-    // console.log(dateAndTime)
-    // console.log(getDateAndTime())
     if(dateAndTime > getDateAndTime()){
-        // console.log("zgadza się");
         validationDate = true;
     }
     else{
-        // console.log("nie zgadza się");
         validationDate = false;
     }
     return validationDate;
 }
 
-// function sortArray(toDosArray) {
-//     toDosArray.sort(function (a, b) {
-//         let result = (a.endDate < b.endDate) ? -1 : ((a.endDate > b.endDate) ? 1 : 0);
-//     });
-// }
 function addToLocalStorage(toDosArray) {
     localStorage.setItem('toDos', JSON.stringify(toDosArray));
 }
@@ -90,24 +85,19 @@ function addToDo(nameOfToDo,
     noDateOfEndToDo, 
     descOfToDo){
         dateErrorDiv.classList.add('hide');
-// console.log(dateOfEndToDo.value + "sss")
-    let toDoObj = {
-        name: nameOfToDo.value,
-        startDate: getDateAndTime(),
-        // new Date().toJSON().slice(0,10).replace(/-/g,'/'),
-        endDate: noDateOfEndToDo.checked ? "bezterminowo" : dateOfEndToDo.value,
-        // dateOfEndToDo.value,
-        // noDateOfEndToDo.checked ? "bezterminowo" : dateOfEndToDo.value,
-        endTime: noDateOfEndToDo.checked ? "" : timeOfEndToDo.value,
-        isIndefinite: noDateOfEndToDo.checked,
-        description: descOfToDo.value,
-        isDone: false,
-        identificator: Date.now()
+        nameErrorDiv.classList.add('hide');
+        
+        let toDoObj = {
+            name: nameOfToDo.value,
+            startDate: getDateAndTime(),
+            endDate: noDateOfEndToDo.checked ? "bezterminowo" : dateOfEndToDo.value,
+            endTime: noDateOfEndToDo.checked ? "" : timeOfEndToDo.value,
+            isIndefinite: noDateOfEndToDo.checked,
+            description: descOfToDo.value,
+            isDone: false,
+            identificator: Date.now()
     }
     toDosArray.push(toDoObj);
-    // console.log(toDosArray);
-    // sortArray(toDosArray);
-    // console.log(toDosArray);
     addToLocalStorage(toDosArray);
     clearInputs();
     displayToDos(toDosArray);
@@ -134,11 +124,10 @@ function displayToDos(toDosArray) {
             <p class="details__description">Opis: ${toDo.description}</p>
         </div>`;
         if(toDo.isDone == true){
-             div.firstElementChild.firstElementChild.classList.add('checkedToDo');
-            //  console.log(div.firstElementChild.firstElementChild)
-            // div.nextSibling.lastChild.classList.add('buttonNotActive');
+             div.firstElementChild.classList.add('checkedToDo');
+             div.firstElementChild.lastElementChild.lastElementChild.classList.add('checkBtnInavtive');
+            console.log(div.firstElementChild)
         }
-        // console.log(toDo.endDate + " end");
         toDoListDiv.appendChild(div);
     });
     const nameDiv = [...document.querySelectorAll('.toDoList__li')];
@@ -146,7 +135,6 @@ function displayToDos(toDosArray) {
     nameDiv.forEach(div => {    
         div.addEventListener('click', (event) => {
             if(event.target.classList.contains('toDoList__li')){
-                    //po kliknięciu nadaj klasę show dla elementu brat
                     if (div.nextElementSibling.classList.contains('hide')) {
                         div.nextElementSibling.classList.add('expand');
                         div.nextElementSibling.classList.remove('hide');
@@ -165,21 +153,16 @@ function displayToDos(toDosArray) {
                 removeToDo(event.target.parentElement.parentElement.dataset.id);
             }
             if(event.target.classList.contains('btn_check')){
-                // event.target.parentElement.parentElement.classList.add('checkedToDo');
-                // console.log(event.target.parentElement.parentElement)
-                // console.log(event.target.parentElement.parentElement.dataset.id);
                 checkToDo(event);
             }
         });
     });
 }
-    // let tempItem = cart.find(item => item.id === id);
 
 function removeToDo(id) {
     console.log(id);
     // zwroc do cart all itemsy, które nie mają podanego w parametrze id
     newArray = toDosArray.filter(item => item.identificator != id);
-    // console.log(newArray)
     addToLocalStorage(newArray);
     displayToDos(getFromLocalStorage());
 }
@@ -190,21 +173,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function checkToDo(event){
     let idOfItem = event.target.parentElement.parentElement.dataset.id;
-    //  let tempItems = toDosArray.find(item => item.identificator == idOfItem);
     toDosArray.forEach(item => {
         if(item.identificator == idOfItem && item.isDone == false){
-            // console.log(item)
-            // item.classList.add('checkedToDo');
             item.isDone = true;
             console.log(event.target)
-            // classList.add('buttonNotActive');
         }
     })
-    // console.log(tempItems)
-    // console.log(toDosArray)
     addToLocalStorage(toDosArray);
     displayToDos(getFromLocalStorage());
 }
-
-
-//TODO: zmiana animacji - usuwanie, zaznaczenie jako zrobione? dodanie? rozwijanie to do, zmiana kolorystki, autoprzewinięcie ekranu na rozwinięcie to do, 

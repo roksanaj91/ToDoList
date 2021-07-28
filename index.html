@@ -15,13 +15,15 @@
             <div class="addToDoDiv__noAttributes">
                 <input class="input input__text input__text--small" type="text" placeholder="Wpisz zadanie do zrobienia" id="nameOfToDo">
                 <button class="btn btn_add">Dodaj</button>
+                
             </div>
+            <div id="nameErrorDiv" class="hide errorDiv">Tytuł zadania musi mieć przynajmniej 3 znaki!</div>
             <div class="addToDoDiv__attributes">
                <label for="dateOfEndToDo"> Data zakończenia:</label>
                <input class="input" type="date" name="dateOfEndToDo" id="dateOfEndToDo">
                <label for="timeOfEndToDo"> Czas zakończenia:</label><br>
                <input class="input" type="time" name="timeOfEndToDo" id="timeOfEndToDo"><br>
-               <div id="dateErrorDiv">Wprowadź prawidłową datę i/lub godzinę!</div>
+               <div id="dateErrorDiv" class="hide errorDiv">Wprowadź prawidłową datę i/lub godzinę!</div>
                <label for="noDateOfEndToDo"> Bezterminowo:</label>
                <input class="input" type="checkbox" name="noDateOfEndToDo" id="noDateOfEndToDo"><br>
                <label for="descOfToDo"> Opis:</label>
@@ -29,20 +31,6 @@
             </div>
         </div>
         <div class="toDoListDiv">
-            <!-- <div class="toDoList">
-                <div class="toDoList__li"> 
-                    <div class="toDoList__liTextDiv">zrobić coś</div> 
-                    <div class="toDoList__liBtnsDiv">
-                        <button class="btn btn_delete fas fa-trash"></button>
-                        <button class="btn btn_edit fas fa-edit"></button>
-                    </div>
-                </div>
-                <div class="toDoList__li__details">
-                    <p class="details__startDate">Start: data</p>
-                    <p class="details__endDate">Koniec: data</p>
-                    <p class="details__description">Opis: isdobfifdsbuidsbvusdbausdbasdobsduobvuds bousbdosdbuibdsusdb</p>
-                </div>
-            </div> -->
         </div>
     </div>  
     <script src="main.js"></script>  
