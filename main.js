@@ -4,50 +4,55 @@ const timeOfEndToDo = document.querySelector('#timeOfEndToDo');
 const noDateOfEndToDo = document.querySelector('#noDateOfEndToDo');
 const descOfToDo = document.querySelector('#descOfToDo');
 const addToDoBtn = document.querySelector('.btn, .btn_add');
-const toDoListDiv = document.querySelector('.toDoListDiv');
+const toDoListDiv = document.querySelector('.toDosDiv');
 const dateErrorDiv = document.querySelector('#dateErrorDiv');
 const nameErrorDiv = document.querySelector('#nameErrorDiv');
 
 let toDosArray = [];
 let today = new Date();
 
-addToDoBtn.addEventListener('click', function () {
-    console.log(nameOfToDo.value.length)
-    if(nameOfToDo.value.length < 3) {
-        if(endDateValidate(dateOfEndToDo.value + ' ' + timeOfEndToDo.value) || noDateOfEndToDo.checked)  dateErrorDiv.classList.add('hide');
-        nameErrorDiv.classList.remove('hide');
-        return}
-    if(nameOfToDo.value.length >= 3) nameErrorDiv.classList.add('hide');
-    
-    if(endDateValidate(dateOfEndToDo.value + ' ' + timeOfEndToDo.value) || noDateOfEndToDo.checked){   
-    addToDo(nameOfToDo, 
-        dateOfEndToDo, 
-        timeOfEndToDo, 
-        noDateOfEndToDo, 
-        descOfToDo);
-    }
-    else{
-        dateErrorDiv.classList.remove('hide');
-    }
+document.addEventListener("DOMContentLoaded", () => {
+    displayToDos(getFromLocalStorage());
 });
 
-function getDateAndTime() {
-    let time = ('0' + today.getHours()).slice(-2) + ":" + ('0' + (today.getMinutes()+1)).slice(-2);
-    todayDate = today.getFullYear() + '-' + ('0' + (today.getMonth()+1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
-    let dateTime = todayDate + ' ' + time;
-    return dateTime;
+addFunctinalityToAddBtn();
+disableDateWhenIndefiniteCompletion();
+
+//events
+function addFunctinalityToAddBtn(){
+    addToDoBtn.addEventListener('click', function () {
+        if(nameOfToDo.value.length < 3) {
+            if(endDateValidate(dateOfEndToDo.value + ' ' + timeOfEndToDo.value) || noDateOfEndToDo.checked)  dateErrorDiv.classList.add('hide');
+            nameErrorDiv.classList.remove('hide');
+            return}
+        if(nameOfToDo.value.length >= 3) nameErrorDiv.classList.add('hide');
+
+        if(endDateValidate(dateOfEndToDo.value + ' ' + timeOfEndToDo.value) || noDateOfEndToDo.checked){   
+        addToDo(nameOfToDo, 
+            dateOfEndToDo, 
+            timeOfEndToDo, 
+            noDateOfEndToDo, 
+            descOfToDo);
+        }
+        else{
+            dateErrorDiv.classList.remove('hide');
+        }
+    });
+}
+function disableDateWhenIndefiniteCompletion(){
+    noDateOfEndToDo.addEventListener('change', function () {
+        if (noDateOfEndToDo.checked === false) {
+            dateOfEndToDo.disabled = false;
+            timeOfEndToDo.disabled = false;
+        }
+        else {
+            dateOfEndToDo.disabled = true;
+            timeOfEndToDo.disabled = true;
+        }
+    })
 }
 
-noDateOfEndToDo.addEventListener('change', function () {
-    if (noDateOfEndToDo.checked === false) {
-        dateOfEndToDo.disabled = false;
-        timeOfEndToDo.disabled = false;
-    }
-    else {
-        dateOfEndToDo.disabled = true;
-        timeOfEndToDo.disabled = true;
-    }
-})
+//usefull functions
 function clearInputs() {
     nameOfToDo.value = '';
     dateOfEndToDo.value = '';
@@ -69,16 +74,14 @@ function endDateValidate(dateAndTime){
     }
     return validationDate;
 }
-
-function addToLocalStorage(toDosArray) {
-    localStorage.setItem('toDos', JSON.stringify(toDosArray));
-}
-function getFromLocalStorage() {
-    let localData = localStorage.getItem('toDos') ? JSON.parse(localStorage.getItem('toDos')) : [];
-    toDosArray = localData;
-    return localData;
+function getDateAndTime() {
+    let time = ('0' + today.getHours()).slice(-2) + ":" + ('0' + (today.getMinutes()+1)).slice(-2);
+    todayDate = today.getFullYear() + '-' + ('0' + (today.getMonth()+1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+    let dateTime = todayDate + ' ' + time;
+    return dateTime;
 }
 
+//todos functions
 function addToDo(nameOfToDo, 
     dateOfEndToDo, 
     timeOfEndToDo, 
@@ -102,23 +105,20 @@ function addToDo(nameOfToDo,
     clearInputs();
     displayToDos(toDosArray);
 }
-
-
 function displayToDos(toDosArray) {
-    
     toDoListDiv.innerHTML = '';
-   
+
     toDosArray.forEach(function (toDo) {
         const div = document.createElement('div');
         div.classList.add('toDoList');
-        div.innerHTML = `<div class="toDoList__li" data-id=${toDo.identificator}> 
-        <div class="toDoList__liTextDiv">${toDo.name}</div> 
-        <div class="toDoList__liBtnsDiv">
+        div.innerHTML = `<div class="toDosDiv__toDoMainElement" data-id=${toDo.identificator}> 
+        <div class="toDosDiv__toDoMainElement__TextDiv">${toDo.name}</div> 
+        <div class="toDosDiv__toDoMainElement__BtnsDiv">
             <button class="btn btn_delete fas fa-trash"></button>
             <button class="btn btn_check fas fa-check"></button>
         </div>
         </div>
-        <div class="toDoList__li__details hide" data-id=${toDo.identificator}>
+        <div class="toDosDiv__toDoMainElement__details hide" data-id=${toDo.identificator}>
             <p class="details__startDate">Start: ${toDo.startDate}</p>
             <p class="details__endDate">Koniec: ${toDo.endDate} ${toDo.endTime}</p>
             <p class="details__description">Opis: ${toDo.description}</p>
@@ -126,15 +126,14 @@ function displayToDos(toDosArray) {
         if(toDo.isDone == true){
              div.firstElementChild.classList.add('checkedToDo');
              div.firstElementChild.lastElementChild.lastElementChild.classList.add('checkBtnInavtive');
-            console.log(div.firstElementChild)
         }
         toDoListDiv.appendChild(div);
     });
-    const nameDiv = [...document.querySelectorAll('.toDoList__li')];
+    const nameDiv = [...document.querySelectorAll('.toDosDiv__toDoMainElement')];
 
     nameDiv.forEach(div => {    
         div.addEventListener('click', (event) => {
-            if(event.target.classList.contains('toDoList__li')){
+            if(event.target.classList.contains('toDosDiv__toDoMainElement')){
                     if (div.nextElementSibling.classList.contains('hide')) {
                         div.nextElementSibling.classList.add('expand');
                         div.nextElementSibling.classList.remove('hide');
@@ -158,27 +157,29 @@ function displayToDos(toDosArray) {
         });
     });
 }
-
 function removeToDo(id) {
-    console.log(id);
-    // zwroc do cart all itemsy, które nie mają podanego w parametrze id
     newArray = toDosArray.filter(item => item.identificator != id);
     addToLocalStorage(newArray);
     displayToDos(getFromLocalStorage());
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-    displayToDos(getFromLocalStorage());
-});
-
 function checkToDo(event){
     let idOfItem = event.target.parentElement.parentElement.dataset.id;
     toDosArray.forEach(item => {
         if(item.identificator == idOfItem && item.isDone == false){
             item.isDone = true;
-            console.log(event.target)
         }
     })
     addToLocalStorage(toDosArray);
     displayToDos(getFromLocalStorage());
+}
+
+//Local Storage
+function addToLocalStorage(toDosArray) {
+    localStorage.setItem('toDos', JSON.stringify(toDosArray));
+}
+
+function getFromLocalStorage() {
+    let localData = localStorage.getItem('toDos') ? JSON.parse(localStorage.getItem('toDos')) : [];
+    toDosArray = localData;
+    return localData;
 }

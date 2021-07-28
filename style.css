@@ -1,3 +1,4 @@
+/* general properties */
 *{
     margin: 0;
     padding: 0;
@@ -5,9 +6,6 @@
 }
 *:focus{
     outline: none;
-}
-button:active{
-    box-shadow: 0 0 5px 2px rgb(53, 16, 12);
 }
 body{
     background-color: darkorange;
@@ -18,6 +16,8 @@ body{
     justify-content: center;
     align-items: center;
 }
+
+/* butttons and inputs */
 .input, .btn{
     padding: 6px;
     margin: 4px;
@@ -31,6 +31,9 @@ body{
     background-color: rgb(255, 252, 75, 0.8);
     box-shadow: none;
 }
+button:active{
+    box-shadow: 0 0 5px 2px rgb(53, 16, 12);
+}
 .btn_delete{
     background-color: tomato;
     color: black;
@@ -42,21 +45,24 @@ body{
 ::placeholder{
     color: darkorange;
 }
+.btn_delete:hover{
+    background-color: rgba(255, 99, 71, 0.603);
+    box-shadow: none;
+}
+.btn_check:hover{
+    background-color: rgba(50, 205, 50, 0.603);
+    box-shadow: none;
+}
+.checkBtnInavtive{
+    background-color:lightgray;
+    border: none;
+    box-shadow: none;
+}
+.checkBtnInavtive:hover{
+    background-color:lightgray;
+}
 .input__text{
     width: 300px;
-}
-.addToDoDiv{
-    padding-top: 10px;
-}
-#dateOfEndToDo, #noDateOfEndToDo, #descOfToDo{
-    display: block;
-    padding: 4px;
-    margin: 2px;
-}
-.errorDiv{
-    text-align: center;
-    color: red;
-    padding-top: 10px;
 }
 label{
     padding: 4px;
@@ -64,25 +70,33 @@ label{
     display: inline-block;
     color: rgb(2, 4, 34);
 }
-#noDateOfEndToDo{
-    display: inline-block;
+
+/* add todo elements */
+.addToDoDiv{
+    padding-top: 10px;
 }
-.addToDoDiv__noAttributes{
+.addToDoDiv__nameToDo{
     display: flex;
     flex-direction: row;
+}
+#dateOfEndToDo, #noDateOfEndToDo, #descOfToDo{
+    display: block;
+    padding: 4px;
+    margin: 2px;
+}
+#noDateOfEndToDo{
+    display: inline-block;
 }
 .addToDoDiv__attributes{
     margin-left: 3rem;
     padding-top: 5px;
 }
-ul{
-    list-style-type: none;
-    margin-top: 25px;
-}
-.toDoListDiv{
+
+/* todo elemnts */
+.toDosDiv{
     margin: 10px 0;
 }
-.toDoList__li{
+.toDosDiv__toDoMainElement{
     width: 320px;
     border: rgba(255, 170, 12, 0.5) 1px solid;
     padding: 5px;
@@ -94,26 +108,18 @@ ul{
     justify-content: space-between;
     z-index: 10;
 }
-.toDoList__li:hover{
+.toDosDiv__toDoMainElement:hover{
     background-color:rgba(255, 252, 75, 0.637);
 }
-.toDoList__liTextDiv{
+.toDosDiv__toDoMainElement__TextDiv{
     padding-top: 7px;
 }
-.toDoList__liBtnsDiv{
+.toDosDiv__toDoMainElement__BtnsDiv{
     display: flex;
     justify-content: flex-end;
     justify-self: flex-end; 
 }
-.btn_delete:hover{
-    background-color: rgba(255, 99, 71, 0.603);
-    box-shadow: none;
-}
-.btn_check:hover{
-    background-color: rgba(50, 205, 50, 0.603);
-    box-shadow: none;
-}
-.toDoList__li__details{
+.toDosDiv__toDoMainElement__details{
     width: 320px;
     border: rgba(255, 170, 12, 0.5) 1px solid;
     padding: 5px;
@@ -123,22 +129,18 @@ ul{
     transform: translateY(-50%);
     animation: animateDetails 2s forwards;
 }
-.hide{
-    display: none;
+.errorDiv{
+    text-align: center;
+    color: red;
+    padding-top: 10px;
 }
+
+/* functionalities */
 .checkedToDo{
     color: #32cd32;
 }
-.checkBtnInavtive:hover{
-    background-color:lightgray;
-}
-.checkBtnInavtive{
-    background-color:lightgray;
-    border: none;
-    box-shadow: none;
-}
-.buttonNotActive{
-    background-color: darkgrey;
+.hide{
+    display: none;
 }
 .expand{
     -webkit-animation: animateShow 0.5s forwards;
@@ -147,6 +149,8 @@ ul{
       -o-animation: animateShow 0.5s forwards;
         animation: animateShow 0.5s forwards;
 }
+
+/* animations */
 @keyframes animateShow{
     0%{
         transform: translateY(-20px);
@@ -155,21 +159,23 @@ ul{
         transform: translateY(0px);
     }
 }
+
+/* media */
 @media all and (max-width: 370px) {
-    .addToDoDiv__noAttributes{
+    .addToDoDiv__nameToDo{
         flex-direction: column;
         align-items: center;
     }
-    .toDoList__li{
+    .addToDoDiv__attributes{
+        margin-left: 1rem;
+    }
+    .toDosDiv__toDoMainElement{
         width: 250px;
     }
-    .toDoList__li__details{
+    .toDosDiv__toDoMainElement__details{
         width: 250px;
     }
     .input__text--small{
         width: 250px;
-    }
-    .addToDoDiv__attributes{
-        margin-left: 1rem;
     }
 }
