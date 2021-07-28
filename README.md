@@ -9,9 +9,7 @@ Main features of the project:
 * it is possible to mark the task as completed
 * it is possible to delete a given task
 \
-\
 ***
-\
 \
 # ToDoList(PL)
 To mój pierwszy pełny projekt napisany za pomocą tzw. czystych języków JavaScript, HTML oraz CSS.\
