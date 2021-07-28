@@ -80,7 +80,7 @@ ul{
     margin-top: 25px;
 }
 .toDoListDiv{
-    margin-top: 5px;
+    margin: 10px 0;
 }
 .toDoList__li{
     width: 320px;
