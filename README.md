@@ -3,7 +3,6 @@
 # ToDoList(ENG)
 This is my first full project written in so-called clean JavaScript, HTML and CSS.\
 I`m not using any frameworks or libraries in this project.\
-The design is fully responsive.\
 The data is saving in local memory.\
 \
 Main features of the project:
@@ -17,7 +16,6 @@ Main features of the project:
 # ToDoList(PL)
 To mój pierwszy pełny projekt napisany za pomocą tzw. czystych języków JavaScript, HTML oraz CSS.\
 W tym projekcie nie używam żadnych framework-ów oraz blibliotek.\
-Projekt jest w pełni responsywny.\
 Dane zapisywane są w pamięci lokalnej.\
 \
 Głowne fuknkcjonalości projektu:
