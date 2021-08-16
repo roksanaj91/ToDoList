@@ -2,7 +2,7 @@
 
 # ToDoList(ENG)
 This is my first full project written in so-called clean JavaScript, HTML and CSS.\
-I`m not using in this project any frameworks or libraries in this project.\
+I`m not using any frameworks or libraries in this project.\
 The design is fully responsive.\
 The data is saving in local memory.\
 \
