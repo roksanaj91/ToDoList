@@ -1,5 +1,3 @@
-![todolist-scr](https://user-images.githubusercontent.com/44161825/127306340-24e10aca-9c48-45fb-ab56-9ae27af4409f.png)
-
 # ToDoList(ENG)
 This is my first full project written in so-called clean JavaScript, HTML and CSS.\
 I`m not using any frameworks or libraries in this project.\
@@ -23,3 +21,5 @@ Głowne fuknkcjonalości projektu:
 * niedozwolone jest użycie daty starszej niż obecna oraz wpisanie tytułu zadania krótszego niż 3 znaki
 * możliwe jest oznaczenie zadania jako zakończone
 * możliwe jest usunięcie danego zadania
+
+![todolist-scr](https://user-images.githubusercontent.com/44161825/127306340-24e10aca-9c48-45fb-ab56-9ae27af4409f.png)
